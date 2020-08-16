@@ -1,18 +1,19 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 // express app
 const app = express();
 
 // Connect to MongoDB
-const dbURI = 'mongodb+srv://Santiago:test1234@nodejs-learning.6olpu.mongodb.net/<dbname>?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://Santiago:test1234@nodejs-learning.6olpu.mongodb.net/NodeJS?retryWrites=true&w=majority';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+   .then((result) => app.listen(3000) /* Listen for requests*/)
+   .catch((e) => console.log(e));
 
 //Register view engine
 app.set('view engine', 'ejs');
 // app.set('views', 'THE NAME OF MY VIEWS'); --------> To set a different folder as default for views
-
-// Listen for requests
-app.listen(3000);
 
 // Middleware and static files
 app.use(express.static('public'));
